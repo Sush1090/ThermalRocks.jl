@@ -3,6 +3,10 @@ uuid = "312468b4-a6d1-46b0-b5d8-a8fb782e0f54"
 authors = ["Sushrut"]
 version = "1.0.0-DEV"
 
+[deps]
+CoolProp = "e084ae63-2819-5025-826e-f8e611a84251"
+Intervals = "d8418881-c3e1-53bb-8760-2df7ec849ed5"
+
 [compat]
 julia = "1.6.7"
 
