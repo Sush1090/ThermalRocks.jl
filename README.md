@@ -34,6 +34,14 @@ julia> SpecificHeat(SiO2,400) # at 400K
 782.0702682910592 # J/kg/K
 ```
 
+For already exisiting rocks
+```
+julia> using ThermalRocks
+
+julia> SpecificHeat(BASALT(),400) # at 400K
+880.6060000000001
+```
+
 For making custom compositions
 ```
 julia> using ThermalRocks
