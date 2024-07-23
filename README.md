@@ -3,7 +3,7 @@
 
 [![Build Status](https://github.com/Sush1090/ThermalRocks.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Sush1090/ThermalRocks.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
-A package to have basic properties of rocks that are used as thermal stores.
+A package to have specific heat of rocks and its compositions over different temperature profiles.
 
 Based on "Estimating Heat Capacity and Heat Content of Rocks by - C. Robertson and B. S. Hemingway" https://pubs.usgs.gov/of/1995/0622/report.pdf
 
@@ -18,4 +18,41 @@ For compounds:
 $C_p(T) = a_1 + a_2T + \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
 
 For empirical rocks:
-$C_p(T) = a_1 + a_2T  10^{-4} + 10^{4}  \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
+$C_p(T) = a_1 + 10^{-4} a_2T   + 10^{4}  \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
+
+The database provides coeffecients for the above equations. 
+
+## Usage
+```
+julia> using ThermalRocks
+
+julia> a = SiO₂("QUARTZ")
+SiO₂("QUARTZ", [81.45 0.001828 … -698.5 5.406e-6; 57.96 0.00933 … 0.0 0.0], 60.084, Tuple[(298, 844), (844, 1700)], true)
+
+julia> SpecificHeat(a,400) # at 400K
+782.0702682910592
+```
+
+
+## Declaring New Compound/Rock
+Every Compond is a struct of the following form:
+
+```
+struct MyCompound <: MyCompoundType
+    name::AbstractString
+    A
+    MolarMass
+    T_range::Vector{Tuple}
+    PieceWise::Bool
+    function MyCompound(;name = "MyCompoundName",A = [a b c d e],MolarMass = M,T_range = [(T1,T2)],PieceWise = true)
+            @assert size(A,1) == size(T_range,1) 
+            new(name,A,MolarMass,T_range,PieceWise)
+    end
+end
+export MyCompound
+```
+
+It contains default parameter values from the database and if needed it is possible to modify without declaring a new `struct`.
+
+`MyCompoundType` is the type of compound: `OxideCompunds`, `SulphurCompounds`, etc ...
+
