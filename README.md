@@ -18,4 +18,4 @@ For compounds:
 $C_p(T) = a_1 + a_2T + \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
 
 For empirical rocks:
-$C_p(T) = a_1 + a_2T \dot 10^{-4} + 10^{4} \dot \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
+$C_p(T) = a_1 + a_2T  10^{-4} + 10^{4}  \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} + a_5T^2$
