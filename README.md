@@ -34,7 +34,7 @@ julia> SpecificHeat(SiO2,400) # at 400K
 782.0702682910592 # J/kg/K
 ```
 
-For custom make compositions
+For making custom compositions
 ```
 julia> using ThermalRocks
 
@@ -72,6 +72,7 @@ It contains default parameter values from the database and if needed it is possi
 
 
 ## Package Features
+- Provides already implemented vast range of data for compounds and rocks.
 - Finds specific heat capacity over different temperatures for Compounds found in rocks. Fitted over experimental data.
 - Allows user to get a rough estimate of a custom composition using Neumann-kopp rule. 
 - Allows user to implement custom data under the framework of Shotomate approximations. 
