@@ -45,6 +45,12 @@ end
 
 
 export SpecificHeat
+
+
+function ΔQ(comp::Compound,T_min,T_max;mass = 1,rtol=1e-8)
+    return mass*quadgk(T->SpecificHeat(comp,T),T_min,T_max,rtol = rtol)
+end
+
 # function SpecificHeat(rock::Rocks,T)
 
 # end
