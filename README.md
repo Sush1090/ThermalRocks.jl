@@ -22,17 +22,31 @@ $C_p(T) = a_1 + 10^{-4} a_2T   + 10^{4}  \frac{a_3}{T^2} = \frac{a_4}{\sqrt{T}} 
 
 The database provides coeffecients for the above equations. 
 
-## Usage
+## Usage 
+For already exisiting compounds
 ```
 julia> using ThermalRocks
 
-julia> a = SiO₂("QUARTZ")
+julia> SiO2 = SiO₂("QUARTZ")
 SiO₂("QUARTZ", [81.45 0.001828 … -698.5 5.406e-6; 57.96 0.00933 … 0.0 0.0], 60.084, Tuple[(298, 844), (844, 1700)], true)
 
-julia> SpecificHeat(a,400) # at 400K
-782.0702682910592
+julia> SpecificHeat(SiO2,400) # at 400K
+782.0702682910592 # J/kg/K
 ```
 
+For custom make compositions
+```
+julia> using ThermalRocks
+
+julia> CC = [SiO₂("SILICAGLASS"),Al₂O₃(),Fe₂O₃(),FeO(),MgO(),CaO(),Na₂O(),K₂O()]; # Westerly granite composition
+
+julia> w = [63.48,15.62,1.85,2.70,2.2,4.15,3.59,3.58]./100; #97% of composition taken
+
+julia> MyComp = CustomComposition(name="test",compounds=CC,weights=w);
+
+julia> SpecificHeat(MyComp,400) # at 400K
+870.3047388987216 # J/kg/K
+```
 
 ## Declaring New Compound/Rock
 Every Compond is a struct of the following form:
@@ -56,3 +70,8 @@ It contains default parameter values from the database and if needed it is possi
 
 `MyCompoundType` is the type of compound: `OxideCompunds`, `SulphurCompounds`, etc ...
 
+
+## Package Features
+- Finds specific heat capacity over different temperatures for Compounds found in rocks. Fitted over experimental data.
+- Allows user to get a rough estimate of a custom composition using Neumann-kopp rule. 
+- Allows user to implement custom data under the framework of Shotomate approximations. 
