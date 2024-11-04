@@ -18,11 +18,16 @@ struct NeumannKoppRule <:MixingRule
 end
 export NeumannKoppRule
 
+
+"""
+`CustomComposition`: A struct that combines compounds and its corresponding weights for a custom inputs
+"""
 struct CustomComposition <: Compositions
     name::AbstractString
     compounds::Vector{Compound}
     weights::Vector{Float64}
     function CustomComposition(;name,compounds,weights)
+        @assert size(compounds) == size(weights)
         new(name,compounds,weights)
     end
 end

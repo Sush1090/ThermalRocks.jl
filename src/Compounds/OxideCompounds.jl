@@ -107,7 +107,9 @@ struct CaOH2 <: OxideCompounds
 end
 export CaOH2
 
-
+"""
+`SiO₂`: Has 5 types - `QUARTZ`,`CRISTOBALITE`,`COESITE`,`STISHOVITE`,`SILICAGLASS`. Pass this as a string to the struct. Default is set to `QUARTZ`
+"""
 struct SiO₂ <: OxideCompounds
     name::AbstractString
     A
